@@ -1,5 +1,5 @@
 InfiniPy
-Raspberry Pi Kiosk HTML Framework
 ========
+Raspberry Pi Kiosk HTML Framework
 
 InfiniPy
