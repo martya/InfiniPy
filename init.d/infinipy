@@ -1,0 +1,40 @@
+#!/bin/bash
+# /etc/init.d/infinipy
+
+### BEGIN INIT INFO
+# Provides:          InfiniPy
+# Required-Start:    $local_fs $network $syslog
+# Required-Stop:     $local_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: InfiniPy PHP & X's Browser Startup
+# Description: Launch PHP's built-in web server, X server and webkit browser
+### END INIT INFO
+
+case "$1" in
+    start)
+
+        _IP=$(hostname -I)
+        /usr/bin/php -S "$_IP":80 -t /home/pi/infinipy/html &
+        echo -e "[ \e[32mok \e[0m] PHP's built-in web server started..."
+
+        /usr/bin/startx /usr/bin/browser --url="http://"$_IP"" tty1 </dev/tty1 >$
+        echo -e "[ \e[32mok \e[0m] X And Browser started..."
+
+        ;;
+    stop)
+        pkill -f /usr/bin/php
+        echo -e "[ \e[32mok \e[0m] PHP's built-in web server stopped..."
+
+        pkill -f /usr/bin/startx
+        pkill -f /usr/bin/browser
+        echo -e "[ \e[32mok \e[0m] X And Browser stopped..."
+
+        ;;
+    *)
+        echo "Usage: /etc/init.d/php start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
