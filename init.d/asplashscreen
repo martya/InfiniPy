@@ -1,18 +1,19 @@
-#! /bin/sh
+#!/bin/bash
+# /etc/init.d/asplashscreen
+
 ### BEGIN INIT INFO
 # Provides:          asplashscreen
 # Required-Start:
 # Required-Stop:
 # Should-Start:      
-# Default-Start:     S
-# Default-Stop:
+# Default-Start:     0
+# Default-Stop:		 0
 # Short-Description: Show custom splashscreen
 # Description:       Show custom splashscreen
 ### END INIT INFO
 
 do_start () {
-
-    omxplayer /home/pi/infinipy/video.mp4 &  
+    omxplayer --align center -b /home/pi/infinipy/video.mp4 &  
     exit 0
 }
 

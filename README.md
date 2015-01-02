@@ -13,9 +13,9 @@ Looking for your setting :
 And configure "LANGUAGE, LANG, LC_ALL" if their empty :
 
 like
-<pre><code>export LANGUAGE=fr_FR.UTF-8
-export LANG=fr_FR.UTF-8
-export LC_ALL=fr_FR.UTF-8</code></pre>
+<pre><code>export LANGUAGE=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8</code></pre>
 
 ## Package : Re-synchronize And Install the newest versions
 Re-synchronize the package index files from their sources
@@ -28,11 +28,12 @@ Install the newest versions of all packages currently installed on the system fr
 <pre><code>sudo apt-get -y install php5-cli</pre></code>
 
 ## BROWSER 
-<pre><code>sudo apt-get install libwebkitgtk-3.0-dev
+<pre><code>sudo apt-get -y install libwebkitgtk-3.0-dev
 git clone https://github.com/martya/kiosk-browser/
 
 cd kiosk-browser
 make
+cd
 sudo ln -s /home/pi/kiosk-browser/browser /usr/bin/browser
 </pre></code>
 
@@ -40,12 +41,10 @@ sudo ln -s /home/pi/kiosk-browser/browser /usr/bin/browser
 
 
 ### PHP & X's BROWSER 
-git clone https://github.com/martya/infinipy/
+<pre><code>git clone https://github.com/martya/infinipy/</pre></code>
 
 Link files
-<pre><code>
-sudo ln -s /home/pi/infinipy/init.d/infinipy /etc/init.d/infinipy
-</pre></code>
+<pre><code>sudo ln -s /home/pi/infinipy/init.d/infinipy /etc/init.d/infinipy</pre></code>
 
 Modify the owner and properties
 <pre><code>sudo chown root:root /etc/init.d/infinipy
@@ -57,17 +56,15 @@ sudo update-rc.d infinipy defaults 4
 Edit /boot/cmdline.txt
 <pre><code>sudo nano /boot/cmdline.txt</pre></code>
 
-Add quiet to the end of the line
-'... rootwait quiet
+Add 'quiet' to the end of the line
+<pre><code>... rootwait quiet</pre></code>
 
 Link files
-<pre><code>
-sudo ln -s /home/pi/infinipy/init.d/asplashscreen /etc/init.d/asplashscreen
+<pre><code>sudo ln -s /home/pi/infinipy/init.d/asplashscreen /etc/init.d/asplashscreen
 </pre></code>
-
 
 Modify the owner and properties
 <pre><code>sudo chown root:root /etc/init.d/asplashscreen
 sudo chmod 755 /etc/init.d/asplashscreen
-sudo update-rc.d asplashscreen defaults 4
+sudo update-rc.d asplashscreen defaults 0
 </pre></code>
