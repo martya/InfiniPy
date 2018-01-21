@@ -49,7 +49,7 @@ Link files
 Modify the owner and properties
 <pre><code>sudo chown root:root /etc/init.d/infinipy
 sudo chmod 755 /etc/init.d/infinipy
-sudo update-rc.d infinipy defaults 4
+sudo update-rc.d infinipy defaults 6
 </pre></code>
 
 ### Startup Movie
