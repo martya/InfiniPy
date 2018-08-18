@@ -15,7 +15,7 @@
 case "$1" in
     start)
 
-        _IP=$(hostname -I)
+        _IP=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
         /usr/bin/php -S "$_IP":80 -t /home/pi/infinipy/html &
         echo -e "[ \e[32mok \e[0m] PHP's built-in web server started..."
 
@@ -33,7 +33,7 @@ case "$1" in
 
         ;;
     *)
-        echo "Usage: /etc/init.d/php start|stop"
+        echo "Usage: infinipy start|stop"
         exit 1
         ;;
 esac
