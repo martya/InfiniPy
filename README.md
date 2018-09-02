@@ -4,30 +4,61 @@ Raspberry Pi Kiosk HTML Framework
 
 ## Prerequisite
 
-A "Raspbian wheezy" configured as you want with "raspi-config"
+A "Raspbian stretch" configured as you want with "raspi-config"
 
-## Localization setting
+Boot up the Raspberry Pi, login as user pi with password raspberry, then start <pre><code>sudo raspi-config</pre></code> to apply some initial customizations:
 
-Looking for your setting :
-<pre><code>locale</pre></code>
-And configure "LANGUAGE, LANG, LC_ALL" if their empty :
-
-like
-<pre><code>export LANGUAGE=en_GB.UTF-8
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8</code></pre>
+-Localisation Options
+-Change User Password: This is important 
+-Network Options
+-Boot Options: Select “Desktop / CLI” and then “Console Autologin”.
+-Interfacing Options: Enable SSH access if needed.
 
 ## Package : Re-synchronize And Install the newest versions
 Re-synchronize the package index files from their sources
 And 
-Install the newest versions of all packages currently installed on the system from the sources enumerated in /etc/apt/sources.list(5)
+Install the newest versions of all packages currently installed on the system
 
 <pre><code>sudo apt-get update && sudo apt-get upgrade -y</pre></code>
 
+
+## Minimum Environment for GUI Applications
+<pre><code>sudo apt-get install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox</pre></code>
+
+## Openbox Configuration
+<pre><code>sudo nano /etc/xdg/openbox/autostart</pre></code>
+
+And add the following:
+<pre><code>
+# Disable any form of screen saver / screen blanking / power management
+xset s off
+xset s noblank
+xset -dpms
+
+# Allow quitting the X server with CTRL-ATL-Backspace
+setxkbmap -option terminate:ctrl_alt_bksp
+</pre></code>
+
+
+# Disable any form of screen saver / screen blanking / power management
+xset s off
+xset s noblank
+xset -dpms
+
+# Allow quitting the X server with CTRL-ATL-Backspace
+setxkbmap -option terminate:ctrl_alt_bksp
+
+
 ## PHP
-<pre><code>sudo apt-get -y install php5-cli</pre></code>
+Install PHP-CLI
+<pre><code>sudo apt-get -y install php7.0-cli</pre></code>
+
+## GIT
+Install Git Client
+<pre><code>sudo apt-get -y install git </pre></code>
 
 ## BROWSER 
+it takes a while...
 <pre><code>sudo apt-get -y install libwebkitgtk-3.0-dev
 git clone https://github.com/martya/kiosk-browser/
 
@@ -37,34 +68,13 @@ cd
 sudo ln -s /home/pi/kiosk-browser/browser /usr/bin/browser
 </pre></code>
 
-## PHP & X's BROWSER & Startup Movie
-
-
-### PHP & X's BROWSER 
+## PHP & X's BROWSER 
 <pre><code>git clone https://github.com/martya/infinipy/</pre></code>
 
-Link files
-<pre><code>sudo ln -s /home/pi/infinipy/init.d/infinipy /etc/init.d/infinipy</pre></code>
-
-Modify the owner and properties
-<pre><code>sudo chown root:root /etc/init.d/infinipy
-sudo chmod 755 /etc/init.d/infinipy
-sudo update-rc.d infinipy defaults 6
+Modify the properties
+<pre><code>
+chmod +x infinipy/infinipy
+sudo nano .profile
 </pre></code>
-
-### Startup Movie
-Edit /boot/cmdline.txt
-<pre><code>sudo nano /boot/cmdline.txt</pre></code>
-
-Add 'quiet' to the end of the line
-<pre><code>... rootwait quiet</pre></code>
-
-Link files
-<pre><code>sudo ln -s /home/pi/infinipy/init.d/asplashscreen /etc/init.d/asplashscreen
-</pre></code>
-
-Modify the owner and properties
-<pre><code>sudo chown root:root /etc/init.d/asplashscreen
-sudo chmod 755 /etc/init.d/asplashscreen
-sudo update-rc.d asplashscreen defaults 0
-</pre></code>
+add 
+<pre><code>sudo infinipy/infinipy start</pre></code>
