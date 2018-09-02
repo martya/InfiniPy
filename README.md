@@ -39,16 +39,6 @@ xset -dpms
 setxkbmap -option terminate:ctrl_alt_bksp
 </pre></code>
 
-
-# Disable any form of screen saver / screen blanking / power management
-xset s off
-xset s noblank
-xset -dpms
-
-# Allow quitting the X server with CTRL-ATL-Backspace
-setxkbmap -option terminate:ctrl_alt_bksp
-
-
 ## PHP
 Install PHP-CLI
 <pre><code>sudo apt-get -y install php7.0-cli</pre></code>
