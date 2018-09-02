@@ -73,4 +73,4 @@ add
 ## Rotate the screen (Option)
 <pre><code>sudo nano /boot/config.txt<pre><code>
 Add one of the following lines to the bottom of the file :
-<pre><code>display_rotate=1<pre><code>
+<pre><code>display_rotate=1</pre></code>
